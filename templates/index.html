@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Loan Approval Prediction</title>
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        * {
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #1e3a8a, #2563eb);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 30px;
+        }
+
+        .container {
+            width: 700px;
+            background: #ffffff;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 30px 60px rgba(0,0,0,0.25);
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 30px;
+            font-weight: 800;
+            color: #1e3a8a;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 18px;
+        }
+
+        .field label {
+            display: block;
+            margin-bottom: 6px;
+            font-size: 13px;
+            font-weight: 600;
+            color: #374151;
+        }
+
+        .field input,
+        .field select {
+            width: 100%;
+            padding: 14px;
+            border-radius: 12px;
+            border: 1.5px solid #c7d2fe;
+            font-size: 14px;
+            transition: 0.2s;
+        }
+
+        .field input:focus,
+        .field select:focus {
+            border-color: #2563eb;
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.25);
+            outline: none;
+        }
+
+        button {
+            width: 100%;
+            margin-top: 35px;
+            padding: 16px;
+            font-size: 18px;
+            font-weight: 700;
+            border: none;
+            border-radius: 14px;
+            background: linear-gradient(135deg, #2563eb, #1e40af);
+            color: #ffffff;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 18px 35px rgba(37, 99, 235, 0.45);
+        }
+
+        .result {
+            margin-top: 30px;
+            padding: 20px;
+            text-align: center;
+            font-size: 22px;
+            font-weight: 800;
+            border-radius: 14px;
+            color: #ffffff;
+            background: #16a34a;
+        }
+
+        .result.no {
+            background: #dc2626;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                width: 100%;
+                padding: 28px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+    <h1>🏦 Loan Approval Prediction</h1>
+
+    <form method="post">
+
+        <div class="grid">
+            <div class="field">
+                <label>Person Age</label>
+                <input type="number" name="person_age" required>
+            </div>
+
+            <div class="field">
+                <label>Person Gender</label>
+                <select name="person_gender" required>
+                    <option value="">Select</option>
+                    <option value="1">Male</option>
+                    <option value="0">Female</option>
+                </select>
+            </div>
+
+            <div class="field">
+                <label>Person Income</label>
+                <input type="number" name="person_income" step="any" required>
+            </div>
+
+            <div class="field">
+                <label>Employment Experience (Years)</label>
+                <input type="number" name="person_emp_exp" step="any" required>
+            </div>
+
+            <div class="field">
+                <label>Loan Amount</label>
+                <input type="number" name="loan_amnt" step="any" required>
+            </div>
+
+            <div class="field">
+                <label>Loan Interest Rate (%)</label>
+                <input type="number" name="loan_int_rate" step="any" required>
+            </div>
+
+            <div class="field">
+                <label>Loan % of Income</label>
+                <input type="number" name="loan_percent_income" step="any" required>
+            </div>
+
+            <div class="field">
+                <label>Credit History Length (Years)</label>
+                <input type="number" name="cb_person_cred_hist_length" step="any" required>
+            </div>
+
+            <div class="field">
+                <label>Credit Score</label>
+                <input type="number" name="credit_score" required>
+            </div>
+        </div>
+
+        <button type="submit">🔍 Predict Loan Status</button>
+    </form>
+
+    {% if prediction %}
+        {% if prediction == "Yes" %}
+            <div class="result">Loan Approved ✅</div>
+        {% else %}
+            <div class="result no">Loan Not Approved ❌</div>
+        {% endif %}
+    {% endif %}
+
+</div>
+
+</body>
+</html>
